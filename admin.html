@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>관리자 페이지</h1>
+            <p>인물을 효율적으로 등록합니다.</p>
+        </div>
+        <div class="admin-form">
+            <form id="person-form">
+                <fieldset>
+                    <legend>기본 정보</legend>
+                    <div class="form-group">
+                        <label for="name">이름:</label>
+                        <input type="text" id="name" placeholder="실명 입력" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="class-number">반 (숫자만):</label>
+                        <input type="number" id="class-number" min="1" max="6" placeholder="예: 3" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendance-number">출석번호:</label>
+                        <input type="number" id="attendance-number" min="1" placeholder="예: 15" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="height">키 (cm):</label>
+                        <input type="number" id="height" placeholder="예: 175" required>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>핵심 질문</legend>
+                    <div id="core-questions-container">
+                        <!-- 핵심 질문들이 여기에 동적으로 추가됩니다. -->
+                    </div>
+                </fieldset>
+
+                <button type="submit">저장</button>
+            </form>
+        </div>
+        <div class="links">
+            <a href="index.html">메인으로</a>
+        </div>
+    </div>
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>

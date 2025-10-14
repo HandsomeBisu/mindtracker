@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindtracker</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="top-bar">
+        <a href="index.html" class="home-button">Mindtracker</a>
+    </div>
+    <div class="game-container">
+        <div class="character-container">
+            <img src="assets/mindtracker.png" alt="Akinator">
+        </div>
+        <div class="question-area">
+            <div class="question-bubble">
+                <p id="question-title">질문 1</p>
+                <p id="question-text">질문을 불러오고 있습니다.</p>
+            </div>
+            <div class="answer-buttons">
+                <button id="yes-btn">예</button>
+                <button id="no-btn">아니오</button>
+                <button id="idk-btn">모르겠습니다</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/play.js"></script>
+</body>
+</html>

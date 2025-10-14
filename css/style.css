@@ -1,0 +1,365 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+/* --- Animation Keyframes --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* General Body Styles - Restoring Dark Theme */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Main Page (index.html) */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+
+.header h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #FFD700; /* Gold */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation: slideUpFadeIn 0.6s ease-out;
+}
+
+.header p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    color: #eee;
+    animation: slideUpFadeIn 0.6s ease-out 0.2s;
+    animation-fill-mode: backwards; /* Start animation from transparent state */
+}
+
+.akilamp img {
+    width: 220px;
+    margin-bottom: 40px;
+    filter: drop-shadow(0 0 15px #FFD700);
+    animation: slideUpFadeIn 0.6s ease-out 0.4s;
+    animation-fill-mode: backwards;
+}
+
+.play-button {
+    display: inline-block;
+    background: #FFD700;
+    color: #141E30;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 20px 60px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    transition: all 0.2s ease;
+    animation: slideUpFadeIn 0.6s ease-out 0.6s;
+    animation-fill-mode: backwards;
+}
+
+.play-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    background: #ffc700;
+}
+
+/* Game Page (play.html) Layout */
+.top-bar {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    text-align: left;
+}
+
+.home-button {
+    font-size: 1.5em;
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.game-container {
+    display: flex;
+    align-items: center; /* Vertically center the items */
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 20px;
+    min-height: 80vh; /* Ensure container has height to center */
+}
+
+.character-container img {
+    width: 200px;
+    /* margin-top is no longer needed due to flex centering */
+    filter: drop-shadow(0 0 15px #FFD700);
+}
+
+.question-area {
+    flex-grow: 1;
+    max-width: 600px;
+}
+
+.question-bubble {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #FFD700;
+    border-radius: 20px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.question-bubble.is-changing {
+    opacity: 0;
+}
+
+#question-title {
+    font-size: 1.2em;
+    color: #ccc;
+    margin: 0 0 10px 0;
+}
+
+#question-text {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 0;
+    color: #FFD700;
+}
+
+.answer-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.answer-buttons button {
+    background: #FFD700;
+    color: #141E30;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 150px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.answer-buttons button:hover {
+    background: #ffc700;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+/* Result Page */
+#result-container {
+    background: rgba(0,0,0,0.5);
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid #FFD700;
+    text-align: center;
+    margin-bottom: 30px; /* Add margin to space from buttons */
+    animation: slideUpFadeIn 0.6s ease-out;
+}
+
+#person-name {
+    font-size: 3em;
+    color: #FFD700;
+    text-shadow: 2px 2px 2px #000;
+}
+
+.links {
+    display: flex;
+    gap: 20px; /* Add space between buttons */
+    animation: slideUpFadeIn 0.6s ease-out 0.2s;
+    animation-fill-mode: backwards;
+}
+
+.result-button {
+    display: inline-block;
+    background: #FFD700;
+    color: #141E30;
+    font-size: 1.2em; /* Adjusted font size */
+    font-weight: bold;
+    padding: 15px 35px; /* Adjusted padding */
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+}
+
+.result-button:hover {
+    background: #ffc700;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+/* Admin page styles */
+.admin-form {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+.admin-form fieldset {
+    border: 1px solid #FFD700;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.admin-form legend {
+    color: #FFD700;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.form-group input[type="text"], .form-group input[type="number"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #FFD700;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 1em;
+}
+
+.form-group div {
+    display: flex;
+    gap: 15px;
+}
+
+.form-group input[type="radio"] + label {
+    color: #fff;
+    cursor: pointer;
+}
+.form-group input[type="radio"] {
+    display: none;
+}
+
+.form-group input[type="radio"] + label {
+    padding: 8px 15px;
+    border: 1px solid #FFD700;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.form-group input[type="radio"]:checked + label {
+    background: #FFD700;
+    color: #141E30;
+    font-weight: bold;
+}
+
+.admin-form button {
+    display: inline-block;
+    padding: 15px 40px;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #141E30;
+    background: #FFD700;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.admin-form button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    background: #ffc700;
+}
+
+/* --- Responsive Styles for Mobile --- */
+@media (max-width: 768px) {
+    /* General font size reduction */
+    .header h1 { font-size: 2.5em; }
+    .header p { font-size: 1.1em; }
+    .play-button { font-size: 1.5em; padding: 15px 40px; }
+    #person-name { font-size: 2.2em; }
+
+    /* Game Page Adjustments */
+    .game-container {
+        flex-direction: column;
+        padding: 10px;
+        align-items: center; /* Center items */
+        min-height: 70vh;
+    }
+
+    .character-container {
+        /* display: none; */ /* Keep image visible */
+        margin-bottom: 15px;
+    }
+
+    .character-container img {
+        width: 120px; /* Make image smaller */
+    }
+
+    .question-area {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #question-title { font-size: 1em; }
+    #question-text { font-size: 1.5em; }
+    .answer-buttons button { font-size: 1em; min-width: 120px; }
+
+    /* Result Page Adjustments */
+    .links {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .result-button {
+        width: 80%;
+        text-align: center;
+    }
+
+    /* Admin Page Adjustments */
+    .admin-form {
+        width: 95%;
+        padding: 20px;
+    }
+    .admin-form legend { font-size: 1.2em; }
+}
