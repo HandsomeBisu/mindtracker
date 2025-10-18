@@ -5,49 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자 페이지</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+<!-- Open Graph 메타 태그 -->
+<meta property="og:title" content="Mindtracker">
+<meta property="og:description" content="Mindtracker의 놀라움을 경험해보세요.">
+<meta property="og:image" content="https://mindtracker.dpsteam.xyz/assets/banner.png">
+<meta property="og:url" content="https://mindtracker.dpsteam.xyz/">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>관리자 페이지</h1>
-            <p>인물을 효율적으로 등록합니다.</p>
+            <p>등록된 사용자 현황을 확인합니다.</p>
         </div>
-        <div class="admin-form">
-            <form id="person-form">
-                <fieldset>
-                    <legend>기본 정보</legend>
-                    <div class="form-group">
-                        <label for="name">이름:</label>
-                        <input type="text" id="name" placeholder="실명 입력" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="class-number">반 (숫자만):</label>
-                        <input type="number" id="class-number" min="1" max="6" placeholder="예: 3" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="attendance-number">출석번호:</label>
-                        <input type="number" id="attendance-number" min="1" placeholder="예: 15" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="height">키 (cm):</label>
-                        <input type="number" id="height" placeholder="예: 175" required>
-                    </div>
-                </fieldset>
-                
-                <fieldset>
-                    <legend>핵심 질문</legend>
-                    <div id="core-questions-container">
-                        <!-- 핵심 질문들이 여기에 동적으로 추가됩니다. -->
-                    </div>
-                </fieldset>
 
-                <button type="submit">저장</button>
-            </form>
+        <div class="admin-container">
+            <h2 id="user-count">총 0명의 사용자가 등록되었습니다.</h2>
+            <div class="user-list-container">
+                <table id="user-table">
+                    <thead>
+                        <tr>
+                            <th>이름</th>
+                            <th>유형</th>
+                            <th>등록일</th>
+                            <th>상태</th>
+                            <th>작업</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-list">
+                        <!-- 사용자 데이터가 여기에 동적으로 추가됩니다. -->
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+
+
         <div class="links">
-            <a href="index.html">메인으로</a>
+            <a href="index.html">메인으로 돌아가기</a>
         </div>
     </div>
+
+    <!-- 사용자 상세 정보 모달 -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-user-name"></h2>
+            <div id="modal-user-answers"></div>
+
+            <div class="add-question-to-person-container">
+                <h3>이 인물에게 질문 추가 (확인사살용)</h3>
+                <form id="add-person-question-form">
+                    <input type="text" id="new-person-question-text" placeholder="질문 내용" required>
+                    <select id="new-person-question-answer">
+                        <option value="예">예</option>
+                        <option value="아니요">아니요</option>
+                    </select>
+                    <button type="submit">질문 추가</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="js/admin.js"></script>
 </body>
 </html>

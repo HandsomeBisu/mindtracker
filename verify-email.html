@@ -15,23 +15,15 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>안녕하세요, Mindtracker 입니다.</h1>
-            <p>동평중학교 2학년 내 학생 또는 교사를 떠올려 보십시오.<br>제가 맞추어 보겠습니다.</p>
+            <h1 id="verification-title">이메일 인증</h1>
+            <p id="verification-message">이메일 주소를 확인하는 중입니다. 잠시만 기다려주세요...</p>
         </div>
-        <div class="akilamp">
-            <img src="assets/mindtracker.png" alt="Akinator Lamp">
-        </div>
-        <div class="play-button-container">
-            <a href="login.html" class="play-button">시작하기</a>
+
+        <div id="login-link-container" class="links" style="margin-top: 40px; display: none;">
+            <a href="index.html" class="result-button">로그인 페이지로 이동</a>
         </div>
     </div>
-    <!-- 인증 로직은 login.html로 이동 -->
+    <script type="module" src="js/verify-email.js"></script>
     <script src="js/global.js" defer></script>
-    <footer>
-        <div class="footer-links">
-            <a href="policy.html">이용약관</a>
-            <a href="privacy.html">개인정보처리방침</a>
-        </div>
-    </footer>
 </body>
 </html>

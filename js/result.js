@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyBx91CgP8V4tkiGKoByZklI_m2QjXBWOUI",
     authDomain: "dpmindtracker.firebaseapp.com",
@@ -12,27 +11,59 @@ const firebaseConfig = {
     measurementId: "G-4D4PYC5EY9"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const personId = urlParams.get('id');
+    const personId = sessionStorage.getItem('resultId');
+    const personNameEl = document.getElementById('person-name');
+    const feedbackSection = document.getElementById('feedback-section');
+    const thankYouMessage = document.getElementById('thank-you-message');
+    const yesBtn = document.getElementById('feedback-yes');
+    const noBtn = document.getElementById('feedback-no');
 
     if (personId) {
-        const docRef = doc(db, "people", personId);
-        const docSnap = await getDoc(docRef);
+        try {
+            const docRef = doc(db, "people", personId);
+            const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-            const person = docSnap.data();
-            document.getElementById('person-name').textContent = person.name;
-
-        } else {
-            console.log("No such document!");
-            document.getElementById('person-name').textContent = "결과를 찾을 수 없습니다.";
+            if (docSnap.exists()) {
+                const person = docSnap.data();
+                personNameEl.textContent = person.name;
+            } else {
+                personNameEl.textContent = "결과를 찾을 수 없습니다.";
+                feedbackSection.style.display = 'none';
+            }
+        } catch (error) {
+            console.error("결과 로드 실패:", error);
+            personNameEl.textContent = "오류가 발생했습니다.";
+            feedbackSection.style.display = 'none';
         }
     } else {
-        document.getElementById('person-name').textContent = "오류가 발생했습니다.";
+        personNameEl.textContent = "오류가 발생했습니다.";
+        feedbackSection.style.display = 'none';
     }
+
+    const handleFeedback = async (wasCorrect) => {
+        yesBtn.disabled = true;
+        noBtn.disabled = true;
+
+        try {
+            await addDoc(collection(db, "feedback"), {
+                personId: personId,
+                correct: wasCorrect,
+                timestamp: new Date()
+            });
+            feedbackSection.style.display = 'none';
+            thankYouMessage.style.display = 'block';
+        } catch (error) {
+            console.error("피드백 저장 실패: ", error);
+            alert("피드백 저장에 실패했습니다. 다시 시도해주세요.");
+            yesBtn.disabled = false;
+            noBtn.disabled = false;
+        }
+    };
+
+    yesBtn.addEventListener('click', () => handleFeedback(true));
+    noBtn.addEventListener('click', () => handleFeedback(false));
 });

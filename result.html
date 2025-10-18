@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>결과 페이지</title>
+    <title>Mindtracker</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+<!-- Open Graph 메타 태그 -->
+<meta property="og:title" content="Mindtracker">
+<meta property="og:description" content="Mindtracker의 놀라움을 경험해보세요.">
+<meta property="og:image" content="https://mindtracker.dpsteam.xyz/assets/banner.png">
+<meta property="og:url" content="https://mindtracker.dpsteam.xyz/">
 </head>
 <body>
     <div class="container">
@@ -14,6 +20,14 @@
         </div>
         <div id="result-container">
             <h2 id="person-name"></h2>
+            <div id="feedback-section">
+                <p class="feedback-question">이 인물이 맞습니까?</p>
+                <div class="answer-buttons">
+                    <button id="feedback-yes">예</button>
+                    <button id="feedback-no">아니요</button>
+                </div>
+            </div>
+            <p id="thank-you-message" style="display:none;">피드백을 보내주셔서 감사합니다!</p>
         </div>
         <div class="links">
             <a href="play.html" class="result-button">다시하기</a>
@@ -21,5 +35,6 @@
         </div>
     </div>
     <script type="module" src="js/result.js"></script>
+    <script src="js/global.js" defer></script>
 </body>
 </html>

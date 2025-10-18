@@ -17,33 +17,40 @@
     }
 }
 
-/* General Body Styles - Restoring Dark Theme */
+/* General Body Styles */
 body {
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
-    background: #141E30;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 20px;
+    background: #141E30;
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);
+    background: linear-gradient(to right, #243B55, #141E30);
     color: white;
+    display: flex;
+    flex-direction: column; /* Changed from row to column */
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
     animation: fadeIn 0.8s ease-in-out;
+    overflow-x: hidden;
 }
 
-/* Main Page (index.html) */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    width: 100%;
+    max-width: 800px;
     text-align: center;
     padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .header h1 {
-    font-size: 3.5em;
+    font-size: 2.8em;
     font-weight: 700;
     margin-bottom: 10px;
-    color: #FFD700; /* Gold */
+    color: #FFD700;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     animation: slideUpFadeIn 0.6s ease-out;
 }
@@ -53,7 +60,7 @@ body {
     margin-bottom: 30px;
     color: #eee;
     animation: slideUpFadeIn 0.6s ease-out 0.2s;
-    animation-fill-mode: backwards; /* Start animation from transparent state */
+    animation-fill-mode: backwards;
 }
 
 .akilamp img {
@@ -64,19 +71,24 @@ body {
     animation-fill-mode: backwards;
 }
 
+.play-button-container {
+    text-align: center;
+    margin-top: 20px;
+    animation: slideUpFadeIn 0.6s ease-out 0.6s;
+    animation-fill-mode: backwards;
+}
+
 .play-button {
     display: inline-block;
     background: #FFD700;
     color: #141E30;
-    font-size: 2em;
+    font-size: 1.6em;
     font-weight: bold;
-    padding: 20px 60px;
+    padding: 15px 45px;
     border-radius: 50px;
     text-decoration: none;
     box-shadow: 0 5px 15px rgba(0,0,0,0.4);
     transition: all 0.2s ease;
-    animation: slideUpFadeIn 0.6s ease-out 0.6s;
-    animation-fill-mode: backwards;
 }
 
 .play-button:hover {
@@ -85,11 +97,61 @@ body {
     background: #ffc700;
 }
 
-/* Game Page (play.html) Layout */
+/* Google Login Button */
+.google-login-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #444;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.google-login-btn:hover {
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.google-login-btn::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2048%2048%22%20width%3D%2248px%22%20height%3D%2248px%22%3E%3Cpath%20fill%3D%22%23FFC107%22%20d%3D%22M43.611%2C20.083H42V20H24v8h11.303c-1.649%2C4.657-6.08%2C8-11.303%2C8c-6.627%2C0-12-5.373-12-12s5.373-12%2C12-12c3.059%2C0%2C5.842%2C1.154%2C7.961%2C3.039l5.657-5.657C34.046%2C6.053%2C29.268%2C4%2C24%2C4C12.955%2C4%2C4%2C12.955%2C4%2C24s8.955%2C20%2C20%2C20s20-8.955%2C20-20C44%2C22.659%2C43.862%2C21.35%2C43.611%2C20.083z%22/%3E%3Cpath%20fill%3D%22%23FF3D00%22%20d%3D%22M6.306%2C14.691l6.571%2C4.819C14.655%2C15.108%2C18.961%2C12%2C24%2C12c3.059%2C0%2C5.842%2C1.154%2C7.961%2C3.039l5.657-5.657C34.046%2C6.053%2C29.268%2C4%2C24%2C4C16.318%2C4%2C9.656%2C8.337%2C6.306%2C14.691z%22/%3E%3Cpath%20fill%3D%22%234CAF50%22%20d%3D%22M24%2C44c5.166%2C0%2C9.86-1.977%2C13.409-5.192l-6.19-5.238C29.211%2C35.091%2C26.715%2C36%2C24%2C36c-5.202%2C0-9.619-3.317-11.283-7.946l-6.522%2C5.025C9.505%2C39.556%2C16.227%2C44%2C24%2C44z%22/%3E%3Cpath%20fill%3D%22%231976D2%22%20d%3D%22M43.611%2C20.083H42V20H24v8h11.303c-0.792%2C2.237-2.231%2C4.166-4.087%2C5.574l6.19%2C5.238C42.012%2C35.836%2C44%2C30.138%2C44%2C24C44%2C22.659%2C43.862%2C21.35%2C43.611%2C20.083z%22/%3E%3C/svg%3E');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.links {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+.links a {
+    color: #FFD700;
+    text-decoration: none;
+}
+
+/* Game & Result Pages */
 .top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.3);
     padding: 10px 20px;
     text-align: left;
+    box-sizing: border-box;
 }
 
 .home-button {
@@ -101,16 +163,14 @@ body {
 
 .game-container {
     display: flex;
-    align-items: center; /* Vertically center the items */
+    align-items: center;
     justify-content: center;
-    padding: 40px 20px;
     gap: 20px;
-    min-height: 80vh; /* Ensure container has height to center */
+    width: 100%;
 }
 
 .character-container img {
     width: 200px;
-    /* margin-top is no longer needed due to flex centering */
     filter: drop-shadow(0 0 15px #FFD700);
 }
 
@@ -183,7 +243,7 @@ body {
     border-radius: 20px;
     border: 2px solid #FFD700;
     text-align: center;
-    margin-bottom: 30px; /* Add margin to space from buttons */
+    margin-bottom: 30px;
     animation: slideUpFadeIn 0.6s ease-out;
 }
 
@@ -193,20 +253,13 @@ body {
     text-shadow: 2px 2px 2px #000;
 }
 
-.links {
-    display: flex;
-    gap: 20px; /* Add space between buttons */
-    animation: slideUpFadeIn 0.6s ease-out 0.2s;
-    animation-fill-mode: backwards;
-}
-
 .result-button {
     display: inline-block;
     background: #FFD700;
     color: #141E30;
-    font-size: 1.2em; /* Adjusted font size */
+    font-size: 1.2em;
     font-weight: bold;
-    padding: 15px 35px; /* Adjusted padding */
+    padding: 15px 35px;
     border-radius: 30px;
     text-decoration: none;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
@@ -216,136 +269,245 @@ body {
 .result-button:hover {
     background: #ffc700;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    text-align: center;
 }
 
-/* Admin page styles */
-.admin-form {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 30px;
-    border-radius: 15px;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
-}
-
-.admin-form fieldset {
+/* Explanation Box on Register Page */
+.explanation-box {
+    background: rgba(0, 0, 0, 0.2);
     border: 1px solid #FFD700;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
+    border-radius: 15px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
-.admin-form legend {
+.explanation-box h2 {
+    margin-top: 0;
     color: #FFD700;
-    font-size: 1.5em;
-    font-weight: bold;
-    padding: 0 10px;
 }
 
-.form-group {
-    margin-bottom: 20px;
-    text-align: left;
+.agreement-box {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid #FFD700;
+    border-radius: 15px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
+.agreement-box label {
     font-size: 1.1em;
 }
 
-.form-group input[type="text"], .form-group input[type="number"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #FFD700;
-    background: rgba(255,255,255,0.1);
-    color: #fff;
-    font-size: 1em;
+.agreement-box a {
+    color: #FFD700;
+    text-decoration: underline;
 }
 
-.form-group div {
+/* Register & Admin Pages */
+.question-container, .admin-container {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 15px;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    text-align: left;
+}
+
+.question-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #444;
+}
+.question-item:last-child {
+    border-bottom: none;
+}
+
+/* Register Page Answer Buttons */
+#answer-options {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#answer-options input[type="radio"] {
+    display: none; /* Hide the actual radio button */
+}
+
+#answer-options .radio-option {
+    display: flex;
+    gap: 10px;
+}
+
+#answer-options label {
+    background: transparent;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    border-radius: 30px;
+    padding: 10px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 90px;
+    text-align: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+#answer-options label:hover {
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+#answer-options input[type="radio"]:checked + label {
+    background: #FFD700;
+    color: #141E30;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+.text-answer, .select-answer {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: white;
+    font-size: 1em;
+    width: 80%;
+    max-width: 400px;
+}
+
+
+.question-item label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.question-item .answers {
     display: flex;
     gap: 15px;
 }
 
-.form-group input[type="radio"] + label {
-    color: #fff;
-    cursor: pointer;
-}
-.form-group input[type="radio"] {
+.question-item input[type="radio"] {
     display: none;
 }
 
-.form-group input[type="radio"] + label {
+.question-item input[type="radio"] + label {
     padding: 8px 15px;
     border: 1px solid #FFD700;
     border-radius: 20px;
     transition: all 0.2s ease;
+    cursor: pointer;
 }
 
-.form-group input[type="radio"]:checked + label {
+.question-item input[type="radio"]:checked + label {
     background: #FFD700;
     color: #141E30;
     font-weight: bold;
 }
 
-.admin-form button {
-    display: inline-block;
-    padding: 15px 40px;
-    font-size: 1.5em;
-    font-weight: 700;
+/* Admin Table */
+#user-count {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.user-list-container {
+    overflow-x: auto;
+}
+#user-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#user-table th, #user-table td {
+    padding: 12px 15px;
+    border: 1px solid #444;
+    text-align: center;
+}
+#user-table th {
+    background-color: #FFD700;
     color: #141E30;
+}
+#user-table .detail-btn {
     background: #FFD700;
+    color: #141E30;
     border: none;
-    border-radius: 50px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+.modal-content {
+    background-color: #243B55;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #FFD700;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    color: #fff;
+}
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close-button:hover, .close-button:focus {
+    color: #FFD700;
     text-decoration: none;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+}
+#modal-user-answers ul {
+    list-style-type: none;
+    padding: 0;
+}
+#modal-user-answers li {
+    padding: 8px 0;
+    border-bottom: 1px solid #444;
+}
+#modal-user-answers li:last-child {
+    border-bottom: none;
 }
 
-.admin-form button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    background: #ffc700;
-}
-
-/* --- Responsive Styles for Mobile --- */
+/* Responsive Styles */
 @media (max-width: 768px) {
-    /* General font size reduction */
+    body {
+        padding: 10px;
+    }
     .header h1 { font-size: 2.5em; }
     .header p { font-size: 1.1em; }
     .play-button { font-size: 1.5em; padding: 15px 40px; }
     #person-name { font-size: 2.2em; }
 
-    /* Game Page Adjustments */
     .game-container {
         flex-direction: column;
-        padding: 10px;
-        align-items: center; /* Center items */
-        min-height: 70vh;
     }
-
     .character-container {
-        /* display: none; */ /* Keep image visible */
         margin-bottom: 15px;
     }
-
     .character-container img {
-        width: 120px; /* Make image smaller */
+        width: 120px;
     }
-
     .question-area {
         width: 100%;
-        max-width: 100%;
     }
-
-    #question-title { font-size: 1em; }
     #question-text { font-size: 1.5em; }
-    .answer-buttons button { font-size: 1em; min-width: 120px; }
 
-    /* Result Page Adjustments */
     .links {
         flex-direction: column;
         align-items: center;
@@ -355,11 +517,346 @@ body {
         width: 80%;
         text-align: center;
     }
+}
 
-    /* Admin Page Adjustments */
-    .admin-form {
-        width: 95%;
-        padding: 20px;
-    }
-    .admin-form legend { font-size: 1.2em; }
+/* Admin Page Status & Actions */
+.status-approved {
+    color: #4CAF50; /* Green */
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #FFC107; /* Amber */
+    font-weight: bold;
+}
+
+.action-cell {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#user-table .approve-btn {
+    background: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#user-table .approve-btn:hover {
+    background: #45a049;
+}
+
+/* Add Question Form */
+.add-question-container {
+    margin-top: 40px;
+}
+
+#add-question-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#add-question-form input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: white;
+    font-size: 1em;
+}
+
+#add-question-form button {
+    background: #FFD700;
+    color: #141E30;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+#add-question-form button:hover {
+    background: #ffc700;
+}
+/* Result Page Feedback */
+#feedback-section {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #444;
+}
+
+.feedback-question {
+    font-size: 1.4em;
+    color: #eee;
+    margin-bottom: 20px;
+}
+
+#thank-you-message {
+    font-size: 1.5em;
+    color: #4CAF50;
+    font-weight: bold;
+    margin-top: 30px;
+}
+/* Register Page Question Note */
+.question-note {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-left: 4px solid #FFD700;
+    padding: 10px 15px;
+    margin: 15px 0;
+    color: #eee;
+    font-style: italic;
+    text-align: left;
+    border-radius: 4px;
+}
+/* Admin Modal - Add Question to Person */
+.add-question-to-person-container {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+}
+
+#add-person-question-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#add-person-question-form input,
+#add-person-question-form select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: white;
+    font-size: 0.9em;
+}
+
+#add-person-question-form button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+#add-person-question-form button:hover {
+    background: #45a049;
+}
+/* Auth Forms (Login & Signup) */
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.divider {
+    margin: 20px 0;
+    text-align: center;
+    color: #888;
+    position: relative;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background-color: #444;
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+.auth-form-container {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: white;
+    font-size: 1em;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 12px;
+    background: #FFD700;
+    color: #141E30;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.form-group button:hover {
+    background: #ffc700;
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-size: 0.9em;
+    min-height: 1.2em;
+}
+
+
+/* --- Auth Page (Dark Mode) --- */
+
+body.auth-page {
+    justify-content: flex-start;
+    padding-top: 5%;
+}
+
+.auth-page .container {
+    max-width: 450px;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.auth-page .header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.auth-page .header h1 {
+    font-size: 24px; /* Adjusted size */
+    font-weight: 400;
+    text-shadow: none;
+    color: #eee; /* Lighter color for dark mode */
+}
+
+.auth-page .header p {
+    font-size: 16px; /* Adjusted size */
+    color: #ccc; /* Lighter color for dark mode */
+}
+
+.auth-page .auth-form-container {
+    background: rgba(0, 0, 0, 0.3); /* Dark, semi-transparent background */
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 48px 40px 36px;
+}
+
+.auth-page .form-group {
+    margin-bottom: 24px;
+}
+
+.auth-page .form-group input {
+    background-color: #333;
+    border: 1px solid #555;
+    color: white;
+    height: 50px;
+    padding: 0 15px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+}
+
+.auth-page .form-group input:focus {
+    outline: none;
+    border-color: #FFD700; /* Accent color on focus */
+    box-shadow: 0 0 0 1px #FFD700;
+}
+
+.auth-page .form-group button {
+    background: #FFD700; /* Accent color */
+    color: #141E30; /* Dark text for contrast */
+    font-weight: 500;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.auth-page .form-group button:hover {
+    background: #ffc700;
+}
+
+.auth-page .google-login-btn {
+    background-color: transparent;
+    color: #eee;
+    border: 1px solid #555;
+    font-weight: 500;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.auth-page .google-login-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: #777;
+}
+
+.auth-page .divider {
+    color: #888;
+}
+
+.auth-page .divider::before, .auth-page .divider::after {
+    background-color: #444;
+}
+
+.auth-page .links {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+}
+
+.auth-page .links a {
+    color: #FFD700; /* Accent color */
+    font-weight: 500;
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    border-top: 1px solid #ddd;
+}
+
+.footer-links a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.policy-content {
+    text-align: left;
+    display: inline-block;
+}
+
+body.policy-page {
+    overflow-x: auto;
 }

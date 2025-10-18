@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mindtracker</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+<!-- Open Graph 메타 태그 -->
+<meta property="og:title" content="Mindtracker">
+<meta property="og:description" content="Mindtracker의 놀라움을 경험해보세요.">
+<meta property="og:image" content="https://mindtracker.dpsteam.xyz/assets/banner.png">
+<meta property="og:url" content="https://mindtracker.dpsteam.xyz/">
 </head>
 <body>
     <div class="top-bar">
         <a href="index.html" class="home-button">Mindtracker</a>
+        <button id="logout-btn" class="home-button" style="float: right; background: none; border: none; cursor: pointer;">로그아웃</button>
     </div>
     <div class="game-container">
         <div class="character-container">
@@ -27,5 +34,6 @@
         </div>
     </div>
     <script type="module" src="js/play.js"></script>
+    <script src="js/global.js" defer></script>
 </body>
 </html>

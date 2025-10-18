@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindtracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+<!-- Open Graph 메타 태그 -->
+<meta property="og:title" content="Mindtracker">
+<meta property="og:description" content="Mindtracker의 놀라움을 경험해보세요.">
+<meta property="og:image" content="https://mindtracker.dpsteam.xyz/assets/banner.png">
+<meta property="og:url" content="https://mindtracker.dpsteam.xyz/">
+</head>
+<body class="auth-page">
+    <div class="container auth-container">
+        <div class="header">
+            <h1><strong>Mindtraker에 로그인</strong></h1>
+            <p>로그인하고 Mindtracker의 놀라움을 경험해보세요.</p>
+        </div>
+
+        <div class="auth-form-container">
+            <a href="#" id="google-login" class="google-login-btn">Google 계정으로 로그인</a>
+            <div class="divider">또는</div>
+            <form id="email-login-form">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="이메일 주소" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="비밀번호" required>
+                </div>
+                <div id="error-message" class="error-message"></div>
+                <div class="form-group">
+                    <button type="submit">로그인</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="links">
+            <p>계정이 없으신가요? <a href="signup.html">계정 만들기</a></p>
+        </div>
+    </div>
+
+    <script type="module" src="js/login.js"></script>
+    <script src="js/global.js" defer></script>
+</body>
+</html>
