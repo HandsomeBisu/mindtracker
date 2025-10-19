@@ -11,6 +11,60 @@
 <meta property="og:description" content="Mindtracker의 놀라움을 경험해보세요.">
 <meta property="og:image" content="https://mindtracker.dpsteam.xyz/assets/banner.png">
 <meta property="og:url" content="https://mindtracker.dpsteam.xyz/">
+
+<style>
+  .right-ad {
+    position: fixed;
+    top: 100px;           /* 화면 위에서부터 거리 */
+    right: 90px;          /* 화면 오른쪽 여백 */
+    z-index: 1000;        /* 다른 요소 위에 표시 */
+  }
+
+  @media (max-width: 768px) {
+    /* 모바일에서는 광고 숨기기 (160x600은 너무 커요) */
+    .right-ad {
+      display: none;
+    }
+  }
+</style>
+
+<div class="right-ad">
+  <ins class="kakao_ad_area"
+       style="display:none;"
+       data-ad-unit = "DAN-VUVeSBbQ78mP7TOD"
+       data-ad-width = "160"
+       data-ad-height = "600"></ins>
+</div>
+
+<style>
+  /* 왼쪽 고정 광고 스타일 */
+  .left-ad {
+    position: fixed;
+    top: 100px;        /* 위쪽 여백 조정 가능 */
+    left: 90px;        /* 화면 왼쪽에서 거리 */
+    z-index: 1000;     /* 다른 요소 위에 표시 */
+  }
+
+  @media (max-width: 768px) {
+    /* 모바일 화면에서는 광고 숨기기 */
+    .left-ad {
+      display: none;
+    }
+  }
+</style>
+
+<!-- 카카오 애드핏 왼쪽 광고 -->
+<div class="left-ad">
+  <ins class="kakao_ad_area"
+       style="display:none;"
+       data-ad-unit = "DAN-Uo9jnbUgvQiiAVEI"
+       data-ad-width = "160"
+       data-ad-height = "600"></ins>
+</div>
+
+<!-- 카카오 애드핏 스크립트 (페이지당 한 번만 불러오기) -->
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+
 </head>
 <body>
     <div class="container">

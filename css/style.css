@@ -1,6 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 /* --- Animation Keyframes --- */
+@keyframes spinner {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -21,7 +30,6 @@
 body {
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
-    padding: 20px;
     background: #141E30;
     background: -webkit-linear-gradient(to right, #243B55, #141E30);
     background: linear-gradient(to right, #243B55, #141E30);
@@ -167,6 +175,8 @@ body {
     justify-content: center;
     gap: 20px;
     width: 100%;
+    flex: 1;
+    padding: 20px; /* Add padding here */
 }
 
 .character-container img {
@@ -253,10 +263,10 @@ body {
     text-shadow: 2px 2px 2px #000;
 }
 
-.result-button {
+a.result-button {
     display: inline-block;
     background: #FFD700;
-    color: #141E30;
+    color: #141E30 !important; /* Ensure this color is applied */
     font-size: 1.2em;
     font-weight: bold;
     padding: 15px 35px;
@@ -266,7 +276,7 @@ body {
     transition: all 0.2s ease;
 }
 
-.result-button:hover {
+a.result-button:hover {
     background: #ffc700;
     transform: translateY(-2px);
     text-align: center;
@@ -303,6 +313,62 @@ body {
 .agreement-box a {
     color: #FFD700;
     text-decoration: underline;
+}
+
+/* --- Custom Checkbox Styles --- */
+.agreement-box label {
+    position: relative;
+    padding-left: 25px; /* Space for the custom checkbox */
+    cursor: pointer;
+    display: inline-block;
+    line-height: 18px; /* Match checkbox height */
+    vertical-align: middle;
+}
+
+/* Hide the default checkbox */
+.agreement-box input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create the custom checkbox box */
+.agreement-box label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #FFD700;
+    background-color: transparent;
+    border-radius: 3px;
+}
+
+/* Create the checkmark (hidden by default) */
+.agreement-box label::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid #FFD700;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    display: none; /* Hide it */
+}
+
+/* Show the checkmark when the checkbox is checked */
+.agreement-box input[type="checkbox"]:checked + label::after {
+    display: block;
+}
+
+/* Optional: slightly change box on hover */
+.agreement-box label:hover::before {
+    background-color: rgba(255, 215, 0, 0.1);
 }
 
 /* Register & Admin Pages */
@@ -852,11 +918,71 @@ footer {
     color: #ffffff;
 }
 
-.policy-content {
-    text-align: left;
-    display: inline-block;
-}
-
 body.policy-page {
     overflow-x: auto;
+}
+
+/* --- Policy Page Styles --- */
+.policy-content {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 30px 40px;
+    border-radius: 15px;
+    text-align: left;
+    line-height: 1.8;
+    color: #eee;
+    word-wrap: break-word; /* Ensure long words don't overflow */
+    overflow-wrap: break-word;
+    white-space: normal; /* Override pre-like behavior */
+}
+
+.policy-content h2 {
+    font-size: 1.5em;
+    color: #FFD700;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #444;
+}
+
+.policy-content h2:first-of-type {
+    margin-top: 0;
+}
+
+.policy-content p {
+    margin-bottom: 1em;
+    color: #ccc;
+}
+
+/* Spinner and Loading Styles */
+.spinner {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(20, 30, 48, 0.3); /* Darker, semi-transparent ring */
+    border-top-color: #141E30; /* Darker spinner head */
+    border-radius: 50%;
+    animation: spinner 0.8s linear infinite;
+}
+
+.auth-page .form-group button,
+.auth-page .google-login-btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-page .form-group button.loading .spinner,
+.auth-page .google-login-btn.loading .spinner {
+    display: block;
+}
+
+/* Hide text and Google icon when loading */
+.auth-page .form-group button.loading .button-text,
+.auth-page .google-login-btn.loading .button-text,
+.auth-page .google-login-btn.loading::before {
+    visibility: hidden;
 }

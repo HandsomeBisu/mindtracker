@@ -33,9 +33,19 @@
                 <div class="form-group">
                     <input type="password" id="signup-password-confirm" placeholder="비밀번호 확인" required>
                 </div>
+                <div class="form-group agreement-box">
+                    <input type="checkbox" id="agreement-checkbox" required>
+                    <label for="agreement-checkbox">
+                        <a href="policy.html" target="_blank">이용약관</a> 및 
+                        <a href="privacy.html" target="_blank">개인정보처리방침</a>에 동의합니다.
+                    </label>
+                </div>
                 <p id="error-message" class="error-message"></p>
                 <div class="form-group">
-                    <button type="submit" id="signup-btn">가입하기</button>
+                    <button type="submit" id="signup-btn">
+                        <span class="button-text">가입하기</span>
+                        <div class="spinner"></div>
+                    </button>
                 </div>
             </form>
         </div>

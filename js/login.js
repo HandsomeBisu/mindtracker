@@ -17,6 +17,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const emailLoginForm = document.getElementById('email-login-form');
+const emailLoginBtn = emailLoginForm.querySelector('button'); // Get the button
 const googleLoginBtn = document.getElementById('google-login');
 const errorMessageEl = document.getElementById('error-message');
 
@@ -41,12 +42,17 @@ emailLoginForm.addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
     errorMessageEl.textContent = '';
 
+    emailLoginBtn.classList.add('loading');
+    emailLoginBtn.disabled = true;
+
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         // onAuthStateChanged will handle the redirect
     } catch (error) {
         console.error("Login failed:", error);
         errorMessageEl.textContent = '계정을 찾을 수 없거나 이메일 또는 비밀번호가 잘못되었습니다.';
+        emailLoginBtn.classList.remove('loading');
+        emailLoginBtn.disabled = false;
     }
 });
 
@@ -54,12 +60,19 @@ emailLoginForm.addEventListener('submit', async (e) => {
 googleLoginBtn.addEventListener('click', async () => {
     const provider = new GoogleAuthProvider();
     errorMessageEl.textContent = '';
+
+    googleLoginBtn.classList.add('loading');
+    googleLoginBtn.disabled = true;
+
     try {
         const result = await signInWithPopup(auth, provider);
         // onAuthStateChanged will handle the redirect
     } catch (error) {
         console.error("Google login failed:", error);
         errorMessageEl.textContent = 'Google 로그인에 실패했습니다. 다시 시도해주세요.';
+    } finally {
+        googleLoginBtn.classList.remove('loading');
+        googleLoginBtn.disabled = false;
     }
 });
 

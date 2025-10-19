@@ -19,6 +19,16 @@
             <p>등록된 사용자 현황을 확인합니다.</p>
         </div>
 
+        <div class="admin-container" style="margin-bottom: 20px;">
+            <h2>게임 설정</h2>
+            <div id="game-settings" style="display: flex; align-items: center; gap: 10px;">
+                <label for="target-count">목표 등록자 수:</label>
+                <input type="number" id="target-count" placeholder="숫자 입력" class="text-answer" style="width: 100px;">
+                <button id="save-target-btn">저장</button>
+            </div>
+            <p id="save-status-message" style="margin-top: 10px; height: 1em;"></p>
+        </div>
+
         <div class="admin-container">
             <h2 id="user-count">총 0명의 사용자가 등록되었습니다.</h2>
             <div class="user-list-container">

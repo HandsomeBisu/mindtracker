@@ -24,15 +24,9 @@ let answers = {};
 const questionTitleEl = document.getElementById('question-title');
 const questionTextEl = document.getElementById('question-text');
 const answerOptionsEl = document.getElementById('answer-options');
+const registerErrorMsg = document.getElementById('register-error-message');
 const backBtn = document.getElementById('back-btn');
 const nextBtn = document.getElementById('next-btn');
-const agreementCheckbox = document.getElementById('agreement-checkbox');
-
-nextBtn.disabled = true;
-
-agreementCheckbox.addEventListener('change', () => {
-    nextBtn.disabled = !agreementCheckbox.checked;
-});
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -93,6 +87,7 @@ function parseQuestionLine(line) {
 }
 
 function displayQuestion() {
+    registerErrorMsg.textContent = ''; // Clear previous error messages
     const question = questions[currentQuestionIndex];
     if (!question) return;
 
@@ -120,7 +115,7 @@ function displayQuestion() {
         case '드롭다운':
             const selectInput = document.createElement('select');
             selectInput.className = 'select-answer';
-            for (let i = 1; i <= 7; i++) {
+            for (let i = 1; i <= 6; i++) {
                 const option = document.createElement('option');
                 option.value = i;
                 option.text = `${i}반`;
@@ -165,16 +160,34 @@ function saveCurrentAnswer() {
         default:
             const selectedRadio = answerOptionsEl.querySelector('input[name="answer"]:checked');
             if (!selectedRadio) {
-                alert('답변을 선택해주세요.');
+                registerErrorMsg.textContent = '답변을 선택해주세요.';
                 return false;
             }
             answer = selectedRadio.value;
             break;
     }
+
     if (!answer || (typeof answer === 'string' && answer.trim() === '')) {
-        alert('답변을 입력해주세요.');
+        registerErrorMsg.textContent = '답변을 입력해주세요.';
         return false;
     }
+
+    // Custom validation based on question
+    if (question.text === '학번') {
+        const num = parseInt(answer, 10);
+        if (isNaN(num) || !/^\d+$/.test(answer) || num < 1 || num > 25) {
+            registerErrorMsg.textContent = '학번은 1에서 25 사이의 숫자만 입력할 수 있습니다.';
+            return false;
+        }
+    }
+
+    if (question.text === '키') {
+        if (isNaN(parseInt(answer, 10)) || !/^\d+$/.test(answer)) {
+            registerErrorMsg.textContent = '키는 숫자만 입력할 수 있습니다.';
+            return false;
+        }
+    }
+
     answers[question.text] = answer;
     return true;
 }
@@ -186,20 +199,32 @@ function updateButtons() {
 
 backBtn.addEventListener('click', () => {
     if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        displayQuestion();
+        const bubble = document.querySelector('.question-bubble');
+        bubble.classList.add('is-changing');
+
+        setTimeout(() => {
+            currentQuestionIndex--;
+            displayQuestion();
+            bubble.classList.remove('is-changing');
+        }, 300);
     }
 });
 
 nextBtn.addEventListener('click', () => {
     if (!saveCurrentAnswer()) return;
 
-    if (currentQuestionIndex >= questions.length - 1) {
-        submitAnswers();
-    } else {
-        currentQuestionIndex++;
-        displayQuestion();
-    }
+    const bubble = document.querySelector('.question-bubble');
+    bubble.classList.add('is-changing');
+
+    setTimeout(() => {
+        if (currentQuestionIndex >= questions.length - 1) {
+            submitAnswers(); // This navigates away, so no need to remove the class
+        } else {
+            currentQuestionIndex++;
+            displayQuestion();
+            bubble.classList.remove('is-changing');
+        }
+    }, 300);
 });
 
 async function submitAnswers() {

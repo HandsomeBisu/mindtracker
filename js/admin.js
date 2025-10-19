@@ -4,7 +4,7 @@ if (sessionStorage.getItem('isAdminAuthenticated') !== 'true') {
 }
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, orderBy, query, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, orderBy, query, doc, getDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBx91CgP8V4tkiGKoByZklI_m2QjXBWOUI",
@@ -24,6 +24,7 @@ let currentModalUserId = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
     await loadUsers();
+    await loadGameSettings();
 
     const modal = document.getElementById('user-modal');
     const closeButton = document.querySelector('.close-button');
@@ -36,6 +37,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             modal.style.display = 'none';
         }
     });
+
+    const saveTargetBtn = document.getElementById('save-target-btn');
+    saveTargetBtn.addEventListener('click', saveGameSettings);
 
     // Handle the form submission for adding a question to a person
     const addPersonQuestionForm = document.getElementById('add-person-question-form');
@@ -74,6 +78,49 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 });
+
+async function loadGameSettings() {
+    const targetCountInput = document.getElementById('target-count');
+    try {
+        const configDocRef = doc(db, "config", "settings");
+        const configDoc = await getDoc(configDocRef);
+        if (configDoc.exists() && configDoc.data().targetUserCount) {
+            targetCountInput.value = configDoc.data().targetUserCount;
+        }
+    } catch (error) {
+        console.error("Error loading game settings:", error);
+    }
+}
+
+async function saveGameSettings() {
+    const targetCountInput = document.getElementById('target-count');
+    const statusMessage = document.getElementById('save-status-message');
+    const count = parseInt(targetCountInput.value, 10);
+
+    if (isNaN(count) || count < 0) {
+        statusMessage.textContent = "유효한 숫자를 입력하세요.";
+        statusMessage.style.color = "#ff4d4d";
+        setTimeout(() => { statusMessage.textContent = ""; }, 3000);
+        return;
+    }
+
+    const saveBtn = document.getElementById('save-target-btn');
+    saveBtn.disabled = true;
+
+    try {
+        const configDocRef = doc(db, "config", "settings");
+        await setDoc(configDocRef, { targetUserCount: count });
+        statusMessage.textContent = "설정이 저장되었습니다!";
+        statusMessage.style.color = "#4CAF50";
+    } catch (error) {
+        console.error("Error saving game settings:", error);
+        statusMessage.textContent = "저장에 실패했습니다.";
+        statusMessage.style.color = "#ff4d4d";
+    } finally {
+        saveBtn.disabled = false;
+        setTimeout(() => { statusMessage.textContent = ""; }, 3000);
+    }
+}
 
 async function loadUsers() {
     const userTableBody = document.getElementById('user-list');

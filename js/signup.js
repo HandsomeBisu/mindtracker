@@ -25,6 +25,7 @@ signupForm.addEventListener('submit', async (e) => {
     const email = document.getElementById('signup-email').value;
     const password = document.getElementById('signup-password').value;
     const passwordConfirm = document.getElementById('signup-password-confirm').value;
+    const agreementCheckbox = document.getElementById('agreement-checkbox');
 
     if (!name) {
         errorMessage.textContent = '이름을 입력해주세요.';
@@ -41,7 +42,13 @@ signupForm.addEventListener('submit', async (e) => {
         return;
     }
 
+    if (!agreementCheckbox.checked) {
+        errorMessage.textContent = '이용약관 및 개인정보처리방침에 동의해야 합니다.';
+        return;
+    }
+
     signupBtn.disabled = true;
+    signupBtn.classList.add('loading');
     errorMessage.textContent = '';
 
     try {
@@ -78,5 +85,6 @@ signupForm.addEventListener('submit', async (e) => {
         }
     } finally {
         signupBtn.disabled = false;
+        signupBtn.classList.remove('loading');
     }
 });

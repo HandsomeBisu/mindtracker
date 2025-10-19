@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, query, where, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBx91CgP8V4tkiGKoByZklI_m2QjXBWOUI",
@@ -15,6 +15,33 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+
+// --- ACCESS CONTROL LOGIC ---
+(async () => {
+    try {
+        // Get target count
+        const configDocRef = doc(db, "config", "settings");
+        const configDoc = await getDoc(configDocRef);
+        const targetCount = configDoc.exists() && configDoc.data().targetUserCount ? configDoc.data().targetUserCount : 0;
+
+        // If a target is set, check if it's met
+        if (targetCount > 0) {
+            // Get current approved user count
+            const q = query(collection(db, "people"), where("approved", "==", true));
+            const querySnapshot = await getDocs(q);
+            const currentCount = querySnapshot.size;
+
+            if (currentCount < targetCount) {
+                // Redirect if the target is not met
+                window.location.href = 'not-ready.html';
+            }
+        }
+    } catch (error) {
+        console.error("Error checking game readiness:", error);
+        // If there's an error, we allow access to not block users unnecessarily.
+    }
+})();
+// --- END ACCESS CONTROL LOGIC ---
 
 let allQuestions = [];
 let askedQuestions = new Set();
